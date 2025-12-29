@@ -1,0 +1,500 @@
+:root {
+    --bg: #0b1020;
+    --dark: #222d38;
+    --panel: rgba(255, 255, 255, 0.06);
+    --panel-2: rgba(255, 255, 255, 0.08);
+    --text: #f4f7ff;
+    --muted: rgba(244, 247, 255, 0.7);
+    --border: rgba(255, 255, 255, 0.14);
+    --accent: #2796cc;
+    --good: #5bd387;
+    --warn: #cfb034;
+    --bad: #cc5858;
+
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --radius: 18px;
+    --radius-sm: 12px;
+    --max: 1120px;
+
+    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+[data-theme="light"] {
+    --bg: #f6f7fb;
+    --dark: #f6f7fb;
+    --panel: rgba(17, 24, 39, 0.05);
+    --panel-2: rgba(17, 24, 39, 0.08);
+    --text: #0b1020;
+    --muted: rgba(11, 16, 32, 0.7);
+    --border: rgba(0, 0, 0, 0.14);
+    --accent: #2563eb;
+    --shadow: 0 10px 26px rgba(11, 16, 32, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--text);
+    background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(125, 211, 252, 0.22), transparent 55%),
+        radial-gradient(900px 600px at 80% 30%, rgba(248, 113, 113, 0.14), transparent 55%),
+        radial-gradient(700px 500px at 30% 85%, rgba(134, 239, 172, 0.12), transparent 55%),
+        var(--bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-underline-offset: 3px;
+}
+
+.main-container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 22px 16px 48px;
+}
+
+/* Navigation */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.brand .logo {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    color: var(--muted);
+}
+
+.nav-links a.active {
+    color: var(--text);
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+.nav-links a:hover {
+    background: var(--panel);
+    border-color: var(--border);
+    text-decoration: none;
+    color: var(--text);
+}
+
+/* theme */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.btn:hover {
+    background: var(--panel-2);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn.primary {
+    border-color: color-mix(in oklab, var(--accent), transparent 60%);
+    background: color-mix(in oklab, var(--accent), transparent 82%);
+}
+
+.btn.ghost {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* MAIN CONTENT */
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0 16px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: -0.3px;
+}
+
+.sub {
+    margin: 6px 0 0;
+    color: var(--muted);
+}
+
+
+/* CARD   kpi-card, notice-board (Home); (Elf profile)  */
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    width: 60%;
+    margin: 0 auto 28px;
+}
+
+.card h2 {
+    margin: 4px 0 22px;
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.kpi-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-bottom: 14px;
+}
+
+.kpi-card {
+    flex: 1 1 260px;
+    width: auto;
+    margin: 0;
+}
+
+.kpi-value {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+}
+
+
+/* Notice */
+.notice {
+    display: flex;
+    gap: 10px;
+    padding: 4px 12px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    margin-top: 4px;
+    background: var(--accent);
+    flex: 0 0 auto;
+}
+
+.notice p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.notice strong {
+    color: var(--text);
+}
+
+.notice-board {
+    width: 100%;
+    margin: 0;
+}
+
+.notices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* pill */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* ------ */
+/* Toolbar (Toys) */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 14px 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+}
+
+label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+select {
+    cursor: pointer;
+}
+
+select,
+input[type="text"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+}
+
+select option {
+    background-color: var(--dark);
+    color: var(--text);
+}
+
+/* ------ */
+
+
+/* ------ */
+/* Table (Toys, Orders, Elves) */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+}
+
+.table th,
+.table td {
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-size: 14px;
+}
+
+.table th {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* badge */
+.badge {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge.easy {
+    background: color-mix(in oklab, var(--good), transparent 85%);
+}
+
+.badge.medium {
+    background: color-mix(in oklab, var(--warn), transparent 82%);
+}
+
+.badge.hard {
+    background: color-mix(in oklab, var(--bad), transparent 82%);
+}
+
+.badge.stock {
+    background: color-mix(in oklab, var(--accent), transparent 85%);
+}
+
+/* Tabs (Orders) */
+.tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: var(--panel-2);
+    color: var(--text);
+}
+
+/* Form (Create Order) */
+.form {
+    display: grid;
+    gap: 12px;
+    max-width: 720px;
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    padding: 12px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    outline: none;
+    font-weight: 650;
+}
+
+.field textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.help {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.validation {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid color-mix(in oklab, var(--bad), transparent 35%);
+    background: color-mix(in oklab, var(--bad), transparent 86%);
+    color: var(--text);
+    font-size: 13px;
+}
+
+/* ------ */
+
+
+/* meta (Toy details) */
+.meta {
+    display: grid;
+    gap: 10px;
+}
+
+.meta .row {
+    align-items: center;
+    padding: 6px 12px;
+}
+
+.meta .row span {
+    color: var(--muted);
+    font-weight: 700;
+    margin-right: 11px;
+}
+
+.meta .row strong {
+    font-weight: 900;
+}
+
+/* Footer */
+.footer-note {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 12px;
+}
