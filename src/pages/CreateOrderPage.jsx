@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getToys } from "../api/toys";
+import { useState } from "react";
 
 export default function CreateOrderPage() {
+   const [childName, setChildName] = useState("");
+   const [country, setCountry] = useState("");
+   const [toyId, setToyId] = useState("");
+   const [priority, setPriority] = useState("Normal");
+
    const {
       data: toys = [],
       isLoading,
@@ -30,7 +36,15 @@ export default function CreateOrderPage() {
             <form className="form" method="get">
                <div className="field">
                   <label htmlFor="childName">Child Name (min 2 chars) *</label>
-                  <input id="childName" name="childName" type="text" minLength="2" required />
+                  <input
+                     id="childName"
+                     name="childName"
+                     type="text"
+                     minLength="2"
+                     required
+                     value={childName}
+                     onChange={(e) => setChildName(e.target.value)}
+                  />
                   {/* Example validation block (static mock) */}
                   <div className="validation" aria-live="polite">
                      Example: “Child name must be at least 2 characters.”
@@ -39,12 +53,19 @@ export default function CreateOrderPage() {
 
                <div className="field">
                   <label htmlFor="country">Country *</label>
-                  <input id="country" name="country" type="text" required />
+                  <input
+                     id="country"
+                     name="country"
+                     type="text"
+                     required
+                     value={country}
+                     onChange={(e) => setCountry(e.target.value)}
+                  />
                </div>
 
                <div className="field">
                   <label htmlFor="toyId">Toy *</label>
-                  <select id="toyId" name="toyId" required>
+                  <select id="toyId" name="toyId" required value={toyId} onChange={(e) => setToyId(e.target.value)}>
                      <option value="">{isLoading ? "Loading toys..." : "Select a toy..."}</option>
                      {!isError &&
                         toys.map((toy) => (
@@ -58,7 +79,13 @@ export default function CreateOrderPage() {
 
                <div className="field">
                   <label htmlFor="priority">Priority</label>
-                  <select id="priority" name="priority" defaultValue="Normal" required>
+                  <select
+                     id="priority"
+                     name="priority"
+                     required
+                     value={priority}
+                     onChange={(e) => setPriority(e.target.value)}
+                  >
                      <option value="Low">Low</option>
                      <option value="Normal">Normal</option>
                      <option value="High">High</option>
