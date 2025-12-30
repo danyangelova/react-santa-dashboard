@@ -1,57 +1,57 @@
 {
-    "toys": [
-        {
-            "id": "T-101",
-            "name": "Snowy Bear",
-            "category": "Plush",
-            "difficulty": "Easy",
-            "inStock": true
-        },
-        {
-            "id": "T-102",
-            "name": "Robo Reindeer",
-            "category": "Tech",
-            "difficulty": "Hard",
-            "inStock": false
-        },
-        {
-            "id": "T-103",
-            "name": "Candy Cane Puzzle",
-            "category": "Puzzles",
-            "difficulty": "Medium",
-            "inStock": true
-        }
-    ],
-    "orders": [
-        {
-            "id": "O-901",
-            "childName": "Mila",
-            "country": "Bulgaria",
-            "status": "Pending",
-            "toyId": "T-101",
-            "priority": "Normal"
-        }
-    ],
-    "elves": [
-        {
-            "id": "jingle",
-            "name": "Jingle",
-            "role": "Lead Toymaker",
-            "energy": 58,
-            "tasks": [
-                "Assemble toys",
-                "Check quality"
-            ]
-        },
-        {
-            "id": "spruce",
-            "name": "Spruce",
-            "role": "Quality Control",
-            "energy": 72,
-            "tasks": [
-                "Inspect toys",
-                "Report defects"
-            ]
-        }
-    ]
+  "toys": [
+    {
+      "id": "T-101",
+      "name": "Snowy Bear",
+      "category": "Plush",
+      "difficulty": "Easy",
+      "inStock": false
+    },
+    {
+      "id": "T-102",
+      "name": "Robo Reindeer",
+      "category": "Tech",
+      "difficulty": "Hard",
+      "inStock": true
+    },
+    {
+      "id": "T-103",
+      "name": "Candy Cane Puzzle",
+      "category": "Puzzles",
+      "difficulty": "Medium",
+      "inStock": true
+    }
+  ],
+  "orders": [
+    {
+      "id": "O-901",
+      "childName": "Mila",
+      "country": "Bulgaria",
+      "status": "Pending",
+      "toyId": "T-101",
+      "priority": "Normal"
+    }
+  ],
+  "elves": [
+    {
+      "id": "jingle",
+      "name": "Jingle",
+      "role": "Lead Toymaker",
+      "energy": 58,
+      "tasks": [
+        "Assemble toys",
+        "Check quality"
+      ]
+    },
+    {
+      "id": "spruce",
+      "name": "Spruce",
+      "role": "Quality Control",
+      "energy": 72,
+      "tasks": [
+        "Inspect toys",
+        "Report defects"
+      ]
+    }
+  ]
 }
