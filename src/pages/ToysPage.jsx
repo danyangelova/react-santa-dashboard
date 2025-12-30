@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { getToys } from "../api/toys";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function ToysPage() {
+   //local state
+   const [category, setCategory] = useState("All");
+   const [inStockOnly, setInStockOnly] = useState(false);
+   const [sortBy, setSortBy] = useState("name");
+
    const {
       data: toys = [],
       isLoading,
@@ -23,7 +29,7 @@ export default function ToysPage() {
             <div className="controls">
                <div className="control">
                   <label htmlFor="cat">Category</label>
-                  <select id="cat" name="cat">
+                  <select id="cat" value={category} onChange={(e) => setCategory(e.target.value)}>
                      <option>All</option>
                      <option>Plush</option>
                      <option>Tech</option>
@@ -34,12 +40,12 @@ export default function ToysPage() {
 
                <div className="control">
                   <label htmlFor="stock">In Stock</label>
-                  <input id="stock" type="checkbox" />
+                  <input id="stock" type="checkbox" checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.value)}/>
                </div>
 
                <div className="control">
                   <label htmlFor="sort">Sort</label>
-                  <select id="sort" name="sort">
+                  <select id="sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                      <option value="name">By name</option>
                      <option value="difficulty">By difficulty</option>
                   </select>
