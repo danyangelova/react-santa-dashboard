@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getOrders } from "../api/orders";
+import { useState } from "react";
 
 export default function OrdersPage() {
+   const [activeStatus, setActiveStatus] = useState("All");
+
    const {
       data: orders = [],
       isLoading,
@@ -13,6 +16,8 @@ export default function OrdersPage() {
       queryFn: getOrders,
    });
 
+   const visibleOrders = activeStatus === "All" ? orders : orders.filter((order) => order.status === activeStatus);
+
    return (
       <main className="main-container">
          <div className="header">
@@ -21,18 +26,16 @@ export default function OrdersPage() {
                <p className="sub">Filter by status using tabs (UI-only).</p>
             </div>
             <div className="tabs" role="tablist" aria-label="Order status tabs">
-               <button className="tab active" type="button">
-                  All
-               </button>
-               <button className="tab" type="button">
-                  Pending
-               </button>
-               <button className="tab" type="button">
-                  Packed
-               </button>
-               <button className="tab" type="button">
-                  Shipped
-               </button>
+               {["All", "Pending", "Packed", "Shipped"].map((status) => (
+                  <button
+                     key={status}
+                     className={`tab ${activeStatus === status ? "active" : ""}`}
+                     type="button"
+                     onClick={() => setActiveStatus(status)}
+                  >
+                     {status}
+                  </button>
+               ))}
             </div>
          </div>
 
@@ -49,7 +52,7 @@ export default function OrdersPage() {
                </tr>
             </thead>
             <tbody>
-               {orders.map((order) => (
+               {visibleOrders.map((order) => (
                   <tr key={order.id}>
                      <td>#{order.id}</td>
                      <td>{order.childName}</td>
