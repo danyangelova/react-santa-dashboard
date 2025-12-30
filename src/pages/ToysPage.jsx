@@ -98,7 +98,7 @@ export default function ToysPage() {
                <tbody>
                   {visibleToys.map((toy) => (
                      <tr key={toy.id}>
-                        <td>{toy.id}</td>
+                        <td>#{toy.id}</td>
                         <td>{toy.name}</td>
                         <td>{toy.category}</td>
                         <td>

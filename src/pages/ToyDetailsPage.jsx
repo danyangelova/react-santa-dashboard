@@ -81,7 +81,7 @@ export default function ToyDetailsPage() {
             <div className="meta">
                <div className="row">
                   <span>ID</span>
-                  <strong>{toy.id}</strong>
+                  <strong>#{toy.id}</strong>
                </div>
                <div className="row">
                   <span>Category</span>
