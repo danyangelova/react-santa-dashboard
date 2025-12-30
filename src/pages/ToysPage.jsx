@@ -3,6 +3,13 @@ import { getToys } from "../api/toys";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
+function difficultyRank(difficulty) {
+   if (difficulty === "Easy") return 1;
+   if (difficulty === "Medium") return 2;
+   if (difficulty === "Hard") return 3;
+   return 999;
+}
+
 export default function ToysPage() {
    //local state
    const [category, setCategory] = useState("All");
@@ -17,6 +24,21 @@ export default function ToysPage() {
    } = useQuery({
       queryKey: ["toys"],
       queryFn: getToys,
+   });
+
+   let visibleToys = [...toys];
+
+   if (category !== "All") {
+      visibleToys = visibleToys.filter((toy) => toy.category === category);
+   }
+   if (inStockOnly) {
+      visibleToys = visibleToys.filter((toy) => toy.inStock === true);
+   }
+   visibleToys.sort((a, b) => {
+      if (sortBy === "difficulty") {
+         return difficultyRank(a.difficulty) - difficultyRank(b.difficulty);
+      }
+      return a.name.localeCompare(b.name);
    });
 
    return (
@@ -40,7 +62,12 @@ export default function ToysPage() {
 
                <div className="control">
                   <label htmlFor="stock">In Stock</label>
-                  <input id="stock" type="checkbox" checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.value)}/>
+                  <input
+                     id="stock"
+                     type="checkbox"
+                     checked={inStockOnly}
+                     onChange={(e) => setInStockOnly(e.target.checked)}
+                  />
                </div>
 
                <div className="control">
@@ -69,7 +96,7 @@ export default function ToysPage() {
                   </tr>
                </thead>
                <tbody>
-                  {toys.map((toy) => (
+                  {visibleToys.map((toy) => (
                      <tr key={toy.id}>
                         <td>{toy.id}</td>
                         <td>{toy.name}</td>
