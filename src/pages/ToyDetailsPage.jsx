@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getToyById } from "../api/toys";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getToyById, toggleToyStock } from "../api/toys";
 
 export default function ToyDetailsPage() {
    const { toyId } = useParams();
+   const queryClient = useQueryClient();
 
    const {
       data: toy,
@@ -14,6 +15,36 @@ export default function ToyDetailsPage() {
       queryKey: ["toy", toyId],
       queryFn: () => getToyById(toyId),
    });
+
+   const toggleMutation = useMutation({
+      mutationFn: async () => {
+         if (!toy) {
+            throw new Error("Toy not loaded");
+         }
+
+         const nextInStock = !toy.inStock;
+         return toggleToyStock(toyId, nextInStock);
+      },
+
+      onMutate: async () => {
+         await queryClient.cancelQueries({ queryKey: ["toy", toyId] }); //izchakai vs tekushti zaqvki za toys da sprat, predi da pipame kesha
+         const previousToy = queryClient.getQueryData(["toy", toyId]); //vzimame stoinost ot kesha
+         //promenqne kesha
+         queryClient.setQueryData(["toy", toyId], (old) => {
+            if (!old) return old;
+            return { ...old, inStock: !old.inStock };
+         });
+         return { previousToy };
+      },
+
+      // onError: () => {
+      //    //rollback optimistic update by restoring the previous cached toy state
+      // },
+      onSettled: () => {
+         queryClient.invalidateQueries({ queryKey: ["toy", toyId] });
+      },
+   });
+   //PATCH /toys/:id
 
    if (isLoading) {
       return (
@@ -49,8 +80,8 @@ export default function ToyDetailsPage() {
             <h2>{toy.name}</h2>
             <div className="meta">
                <div className="row">
-                  <span>{toy.id}</span>
-                  <strong>{toyId}</strong>
+                  <span>ID</span>
+                  <strong>{toy.id}</strong>
                </div>
                <div className="row">
                   <span>Category</span>
@@ -59,9 +90,7 @@ export default function ToyDetailsPage() {
                <div className="row">
                   <span>Difficulty</span>
                   <strong>
-                     <span className={`badge ${toy.difficulty?.toLowerCase()}`}>
-                        {toy.difficulty}
-                     </span>
+                     <span className={`badge ${toy.difficulty?.toLowerCase()}`}>{toy.difficulty}</span>
                   </strong>
                </div>
                <div className="row">
@@ -80,8 +109,13 @@ export default function ToyDetailsPage() {
                   flexWrap: "wrap",
                }}
             >
-               <button id="toggleBtn" className="btn primary" type="button">
-                  Toggle Stock
+               <button
+                  className="btn primary"
+                  type="button"
+                  onClick={() => toggleMutation.mutate()}
+                  disabled={toggleMutation.isPending}
+               >
+                  {toggleMutation.isPending ? "Toggling..." : "Toggle Stock"}
                </button>
             </div>
 

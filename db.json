@@ -19,7 +19,7 @@
       "name": "Candy Cane Puzzle",
       "category": "Puzzles",
       "difficulty": "Medium",
-      "inStock": true
+      "inStock": false
     }
   ],
   "orders": [
