@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getElves } from "../api/elves";
 
 export default function ElvesPage() {
+   const {
+      data: elves,
+      isLoading,
+      error,
+   } = useQuery({
+      queryKey: ["elves"],
+      queryFn: getElves,
+   });
+
+   if (isLoading) return <main className="main-container">Loading elves...</main>;
+   if (error) return <main className="main-container">Error: {error.message}</main>;
+
    return (
       <main className="main-container">
          <div className="header">
             <div>
                <h1>Elves</h1>
-               <p className="sub">Click an elf name to open the profile page (static link).</p>
             </div>
             <span style={{ fontSize: "12px" }} className="pill">
                🧝 Energy: 0–100
@@ -23,36 +36,18 @@ export default function ElvesPage() {
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <td>Jingle</td>
-                  <td>Lead Toymaker</td>
-                  <td>58</td>
-                  <td>
-                     <Link className="btn ghost" to="/elves/jingle">
+               {elves.map((elf) => (
+                  <tr key={elf.id}>
+                     <td>{elf.name}</td>
+                     <td>{elf.role}</td>
+                     <td>{elf.energy}</td>
+                      <td>
+                     <Link className="btn ghost" to={`/elves/{elf.id}`}>
                         Profile
                      </Link>
                   </td>
-               </tr>
-               <tr>
-                  <td>Spruce</td>
-                  <td>Quality Control</td>
-                  <td>72</td>
-                  <td>
-                     <Link className="btn ghost" to="/elves/spruce">
-                        Profile
-                     </Link>
-                  </td>
-               </tr>
-               <tr>
-                  <td>Robert</td>
-                  <td>Route Planner</td>
-                  <td>63</td>
-                  <td>
-                     <Link className="btn ghost" to="/elves/robert">
-                        Profile
-                     </Link>
-                  </td>
-               </tr>
+                  </tr>
+               ))}
             </tbody>
          </table>
 
