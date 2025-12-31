@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Navbar() {
+   const { theme, toggleTheme } = useTheme();
+
    return (
       <header className="nav">
          <div className="nav-container">
@@ -26,8 +29,8 @@ export default function Navbar() {
 
             <div className="actions">
                {/* theme logic later */}
-               <button className="btn" type="button" aria-label="Toggle theme" disabled title="Theme toggle comes next">
-                  🌓 Theme
+               <button className="btn" type="button" aria-label="Toggle theme" onClick={toggleTheme}>
+                  {theme === "dark" ? "🌖 Light" : "🌒 Dark"}
                </button>
             </div>
          </div>
