@@ -1,16 +1,56 @@
-# React + Vite
+# Santa's Workshop Dashboard
+## 1. Project Overview
+A React single-page application for managing a Christmas workshop.
+The project demonstrates understanding of client-side routing, server state management, local UI state, and clean component architecture using a mock REST API.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 2. Technologies and Tools
+### 🖥️ Front-end
+- React
+- Vite
+- React Router
+- TanStack React Query
+- JavaScript (ES6+)
+- HTML5 & CSS3
 
-Currently, two official plugins are available:
+### ⚙️ Back-end
+- JSON Server (mock REST API)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 3. Project Architecture
+### Directory Structure
+- /api – API request helpers
+- /pages – page-level components
+- /components – reusable UI components
+- /hooks – custom React hooks
+- /context – context providers
 
-## React Compiler
+### Project Separation
+- Client-side: React components responsible for rendering UI and handling user interactions.
+- Server state: Data fetching and caching handled by React Query using a mock REST API.
+- Application logic: Custom hooks and helpers used to separate logic from presentation.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 4. Features and Pages
+- Home Page - *Dashboard overview of the workshop*
+- Toys - *List of available toys, Toy details view, Stock management functionality*
+- Orders - *Orders list view, Order creation form, Order status management*
+- Elves - *Elves list view, Individual elf profile pages, Nested tasks view for each elf*
 
-## Expanding the ESLint configuration
+## 5. Installation Instructions
+1. Clone the repository
+2. Install dependencies
+```bash
+npm install
+```
+3. Start the JSON server:
+```bash
+npm run server
+```
+4. Start the development server:
+```bash
+npm run dev
+```
+- Open in browser vite server on PORT 5173
+- Open JSON server on PORT 3001
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 5. Future Improvements
+- Pagination for large lists
+- Skeleton loading components
