@@ -17,6 +17,8 @@ export default function HomePage() {
       queryFn: getElves,
    });
 
+   const notices = ["Quality check: prioritize plush today.", "Remember: label all High priority orders."];
+
    const isLoading = toysQuery.isLoading || ordersQuery.isLoading || elvesQuery.isLoading;
    const error = toysQuery.error || ordersQuery.error || elvesQuery.error;
 
@@ -29,8 +31,8 @@ export default function HomePage() {
    if (isLoading) {
       return (
          <main className="main-container">
-               <h1>Christmas Status</h1>
-               <div className="footer-note">Loading dashboard…</div>
+            <h1>Christmas Status</h1>
+            <div className="footer-note">Loading dashboard…</div>
          </main>
       );
    }
@@ -38,8 +40,8 @@ export default function HomePage() {
    if (error) {
       return (
          <main className="main-container">
-               <h1>Christmas Status</h1>
-               <div className="footer-note">Error: {error.message}</div>
+            <h1>Christmas Status</h1>
+            <div className="footer-note">Error: {error.message}</div>
          </main>
       );
    }
@@ -74,14 +76,12 @@ export default function HomePage() {
             <h3>Workshop Notice Board</h3>
 
             <div className="notices">
-               <div className="notice">
-                  <span className="dot"></span>
-                  <p>Notice</p>
-               </div>
-               <div className="notice">
-                  <span className="dot"></span>
-                  <p>Notice 2</p>
-               </div>
+               {notices.map((text, inx) => (
+                  <div className="notice" key={inx}>
+                     <span className="dot"></span>
+                     <p>{text}</p>
+                  </div>
+               ))}
             </div>
          </section>
 
