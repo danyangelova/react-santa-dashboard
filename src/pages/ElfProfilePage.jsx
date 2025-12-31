@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 export default function ElfProfilePage() {
    const { elfId } = useParams();
-   console.log("elfId =", elfId);
 
    const {
       data: elf,
@@ -40,12 +39,16 @@ export default function ElfProfilePage() {
                <div>Role: {elf.role}</div>
                <div>
                   <span>Energy: </span>
-                  <strong>{elf.energy}</strong>
+                  <strong>{energy}</strong>
                </div>
             </div>
 
             <div style={{ marginTop: "14px" }}>
-               <button className="btn primary" type="button">
+               <button
+                  className="btn primary"
+                  type="button"
+                  onClick={() => setEnergy((energy) => Math.min(100, energy + 10))}
+               >
                   Boost Energy +10
                </button>
                <span className="pill">Max 100</span>
