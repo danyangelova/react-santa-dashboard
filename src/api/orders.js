@@ -4,6 +4,6 @@ export function getOrders() {
     return api.get("/orders");
 }
 
-export function createOrders(orderData) {
+export function createOrder(orderData) {
     return api.post("/orders", orderData);
 }

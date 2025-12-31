@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getToys } from "../api/toys";
+import { createOrder } from "../api/orders";
 import { useState } from "react";
 
 export default function CreateOrderPage() {
@@ -10,6 +11,9 @@ export default function CreateOrderPage() {
    const [priority, setPriority] = useState("Normal");
    const [errors, setErrors] = useState({});
 
+   const navigate = useNavigate();
+   const queryClient = useQueryClient();
+
    const {
       data: toys = [],
       isLoading,
@@ -17,6 +21,14 @@ export default function CreateOrderPage() {
    } = useQuery({
       queryKey: ["toys"],
       queryFn: getToys,
+   });
+
+   const createMutation = useMutation({
+      mutationFn: createOrder,
+      onSuccess: async () => {
+         await queryClient.invalidateQueries({ queryKey: ["orders"] });
+         navigate("/orders");
+      },
    });
 
    function validate() {
@@ -53,7 +65,25 @@ export default function CreateOrderPage() {
          <section className="card">
             <h3>Create New Order</h3>
 
-            <form className="form" method="get">
+            <form
+               className="form"
+               onSubmit={(e) => {
+                  e.preventDefault();
+                  const ok = validate();
+                  if (!ok) return;
+
+                  const newOrder = {
+                     id: `O-${Date.now()}`,
+                     childName: childName.trim(),
+                     country: country.trim(),
+                     status: "Pending",
+                     toyId,
+                     priority,
+                  };
+                  createMutation.mutate(newOrder);
+               }}
+               noValidate
+            >
                <div className="field">
                   <label htmlFor="childName">Child Name (min 2 chars) *</label>
                   <input
@@ -69,7 +99,7 @@ export default function CreateOrderPage() {
 
                   {errors.childName && (
                      <div className="validation" aria-live="polite">
-                        {errors.childName}”
+                        {errors.childName}
                      </div>
                   )}
                </div>
@@ -126,17 +156,20 @@ export default function CreateOrderPage() {
                </div>
 
                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                  <button className="btn primary" type="submit">
+                  {/* <button className="btn primary" type="submit">
                      Create Order
+                  </button> */}
+                  <button className="btn primary" type="submit" disabled={createMutation.isPending}>
+                     {createMutation.isPending ? "Creating..." : "Create Order"}
                   </button>
                   <Link className="btn" to="/orders">
                      Cancel
                   </Link>
                </div>
 
-               <p className="footer-note">
-                  In React: form state + validation + on submit create order and redirect to /orders.
-               </p>
+               {createMutation.isError && (
+                  <p className="footer-note">Error: {createMutation.error?.message || "Failed to create order."}</p>
+               )}
             </form>
          </section>
       </main>
