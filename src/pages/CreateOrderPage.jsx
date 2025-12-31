@@ -73,7 +73,8 @@ export default function CreateOrderPage() {
                   if (!ok) return;
 
                   const newOrder = {
-                     id: `O-${Date.now()}`,
+                     // id: `O-${Date.now()}`,
+                     id: `O-${Math.floor(100 + Math.random() * 900)}`,
                      childName: childName.trim(),
                      country: country.trim(),
                      status: "Pending",
