@@ -19,6 +19,7 @@
     --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+/* DATA-THEME */
 [data-theme="light"] {
     --bg: #f6f7fb;
     --dark: #f6f7fb;
