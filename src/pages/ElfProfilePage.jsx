@@ -56,16 +56,17 @@ export default function ElfProfilePage() {
 
             {/* Tabs */}
             <div className="tabs" style={{ marginTop: "20px" }}>
-               <Link className="tab active" to="">
+               <NavLink end className={({ isActive }) => `tab ${isActive ? "active" : ""}`} to="">
                   Profile
-               </Link>
-               <Link className="tab" to="tasks">
+               </NavLink>
+
+               <NavLink className={({ isActive }) => `tab ${isActive ? "active" : ""}`} to="tasks">
                   Tasks
-               </Link>
+               </NavLink>
             </div>
 
-            {/* ElfTasksPage renders in here*/}
-            <Outlet />
+            {/* ElfTasksPage renders in here */}
+            <Outlet context={{ elf }} />
          </section>
       </main>
    );
