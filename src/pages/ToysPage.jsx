@@ -117,8 +117,6 @@ export default function ToysPage() {
                </tbody>
             </table>
          )}
-
-         <p className="footer-note">Static filtering/sorting UI only. In React, filter/sort will be state-driven.</p>
       </main>
    );
 }

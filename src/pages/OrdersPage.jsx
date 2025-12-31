@@ -23,7 +23,6 @@ export default function OrdersPage() {
          <div className="header">
             <div>
                <h1>Orders</h1>
-               <p className="sub">Filter by status using tabs (UI-only).</p>
             </div>
             <div className="tabs" role="tablist" aria-label="Order status tabs">
                {["All", "Pending", "Packed", "Shipped"].map((status) => (
@@ -76,8 +75,6 @@ export default function OrdersPage() {
                ＋ New Order
             </Link>
          </div>
-
-         <p className="footer-note">In React: tabs will control state + React Query will load filtered data.</p>
       </main>
    );
 }

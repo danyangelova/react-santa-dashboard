@@ -41,17 +41,15 @@ export default function ElvesPage() {
                      <td>{elf.name}</td>
                      <td>{elf.role}</td>
                      <td>{elf.energy}</td>
-                      <td>
-                     <Link className="btn ghost" to={`/elves/${elf.id}`}>
-                        Profile
-                     </Link>
-                  </td>
+                     <td>
+                        <Link className="btn ghost" to={`/elves/${elf.id}`}>
+                           Profile
+                        </Link>
+                     </td>
                   </tr>
                ))}
             </tbody>
          </table>
-
-         <p className="footer-note">In React: clicking opens /elves/:elfId and nested /tasks route.</p>
       </main>
    );
 }

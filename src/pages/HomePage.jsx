@@ -84,8 +84,6 @@ export default function HomePage() {
                ))}
             </div>
          </section>
-
-         <p className="footer-note">Static UI only. In React, data will be loaded with React Query.</p>
       </main>
    );
 }

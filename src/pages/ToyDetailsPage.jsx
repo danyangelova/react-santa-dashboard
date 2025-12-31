@@ -69,7 +69,8 @@ export default function ToyDetailsPage() {
       <main className="main-container">
          <div className="header">
             <div>
-               <p className="sub">UI-only “Toggle Stock”. In React you'll do optimistic UI updates here.</p>
+               <p></p>
+               {/* <p className="sub">UI-only “Toggle Stock”. In React you'll do optimistic UI updates here.</p> */}
             </div>
             <Link className="btn" to="/toys">
                ← Back to Toys
@@ -118,11 +119,6 @@ export default function ToyDetailsPage() {
                   {toggleMutation.isPending ? "Toggling..." : "Toggle Stock"}
                </button>
             </div>
-
-            <p className="footer-note">
-               This is a static mock. In React: this button updates UI immediately (optimistic update) and then syncs to
-               the server.
-            </p>
          </section>
       </main>
    );
