@@ -1,6 +1,30 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getElfDetails } from "../api/elves";
+import { useEffect, useState } from "react";
 
 export default function ElfProfilePage() {
+   const { elfId } = useParams();
+   console.log("elfId =", elfId);
+
+   const {
+      data: elf,
+      isLoading,
+      error,
+   } = useQuery({
+      queryKey: ["elves", elfId],
+      queryFn: () => getElfDetails(elfId),
+   });
+
+   const [energy, setEnergy] = useState(0);
+
+   useEffect(() => {
+      if (elf) setEnergy(elf.energy);
+   }, [elf]);
+
+   if (isLoading) return <main className="main-container">Loading profile...</main>;
+   if (error) return <main className="main-container">Error: {error.message}</main>;
+
    return (
       <main className="main-container">
          <div className="header">
@@ -12,11 +36,11 @@ export default function ElfProfilePage() {
 
          <section className="card">
             <div className="meta">
-               <h2>Jingle</h2>
-               <div>Role: Lead Toymaker</div>
+               <h2>{elf.name}</h2>
+               <div>Role: {elf.role}</div>
                <div>
                   <span>Energy: </span>
-                  <strong>58</strong>
+                  <strong>{elf.energy}</strong>
                </div>
             </div>
 

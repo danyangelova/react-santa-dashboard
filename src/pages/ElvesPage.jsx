@@ -42,7 +42,7 @@ export default function ElvesPage() {
                      <td>{elf.role}</td>
                      <td>{elf.energy}</td>
                       <td>
-                     <Link className="btn ghost" to={`/elves/{elf.id}`}>
+                     <Link className="btn ghost" to={`/elves/${elf.id}`}>
                         Profile
                      </Link>
                   </td>
