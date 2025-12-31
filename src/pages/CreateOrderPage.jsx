@@ -8,6 +8,7 @@ export default function CreateOrderPage() {
    const [country, setCountry] = useState("");
    const [toyId, setToyId] = useState("");
    const [priority, setPriority] = useState("Normal");
+   const [errors, setErrors] = useState({});
 
    const {
       data: toys = [],
@@ -17,6 +18,25 @@ export default function CreateOrderPage() {
       queryKey: ["toys"],
       queryFn: getToys,
    });
+
+   function validate() {
+      const nextErrors = {};
+
+      if (childName.trim().length < 2) {
+         nextErrors.childName = "Child name must be at least 2 characters.";
+      }
+
+      if (country.trim().length === 0) {
+         nextErrors.country = "Country is required.";
+      }
+
+      if (!toyId) {
+         nextErrors.toyId = "Please select a toy.";
+      }
+
+      setErrors(nextErrors);
+      return Object.keys(nextErrors).length === 0;
+   }
 
    return (
       <main className="main-container">
@@ -46,9 +66,12 @@ export default function CreateOrderPage() {
                      onChange={(e) => setChildName(e.target.value)}
                   />
                   {/* Example validation block (static mock) */}
-                  <div className="validation" aria-live="polite">
-                     Example: “Child name must be at least 2 characters.”
-                  </div>
+
+                  {errors.childName && (
+                     <div className="validation" aria-live="polite">
+                        {errors.childName}”
+                     </div>
+                  )}
                </div>
 
                <div className="field">
@@ -61,6 +84,12 @@ export default function CreateOrderPage() {
                      value={country}
                      onChange={(e) => setCountry(e.target.value)}
                   />
+
+                  {errors.country && (
+                     <div className="validation" aria-live="polite">
+                        {errors.country}
+                     </div>
+                  )}
                </div>
 
                <div className="field">
@@ -74,7 +103,11 @@ export default function CreateOrderPage() {
                            </option>
                         ))}
                   </select>
-                  <div className="help">Toy options will come from the Toys module in React.</div>
+                  {errors.toyId && (
+                     <div className="validation" aria-live="polite">
+                        {errors.toyId}
+                     </div>
+                  )}
                </div>
 
                <div className="field">
