@@ -55,7 +55,7 @@ export default function CreateOrderPage() {
          <div className="header">
             <div>
                <h1>Create Order</h1>
-               <p className="sub">Static form layout + example validation messages (UI-only).</p>
+               {/* <p className="sub">Static form layout + example validation messages (UI-only).</p> */}
             </div>
             <Link className="btn" to="/orders">
                ← Back to Orders
